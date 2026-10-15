@@ -1,0 +1,17 @@
+allprojects {
+    group = 'dev.lumen.teleportlab'
+    version = '1.0.0'
+}
+subprojects {
+    apply plugin: 'java'
+    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        // Restricted desktops may block Gradle worker loopback connections.
+        if (providers.gradleProperty('commandLineJavac').isPresent()) {
+            options.fork = true
+            options.forkOptions.executable = new File(System.getProperty('java.home'),
+                    'bin/javac' + (System.getProperty('os.name').startsWith('Windows') ? '.exe' : '')).path
+        }
+    }
+}

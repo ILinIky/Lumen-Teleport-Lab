@@ -2,6 +2,8 @@
 
 Eigenständiges, ausschließlich beobachtendes Diagnosewerkzeug für **Lumen Client**, Minecraft **1.21.7**, Forge **57.0.3**, Java **21**. Die Aufzeichnung ist bei jedem Programmstart **ausgeschaltet**. Keine eigenen Teleports, Bewegungspakete, Paketänderungen, Uploads oder Serverinstallation.
 
+![Dashboard im Forge-Entwicklungsclient, Aufzeichnung deaktiviert](docs/images/dashboard.png)
+
 ## Installation und Benutzung
 
 1. Java 21 installieren. Im Repository `gradlew.bat build` unter Windows bzw. `./gradlew build` unter Linux ausführen. Der erste Build benötigt Internetzugriff auf Gradle, Forge, Mojang und Sponge.
@@ -22,7 +24,7 @@ Unter Windows kann auch `teleport_analyser_bauen.bat` gestartet werden. Der Star
 | `core/` | Reiner Java-Kern ohne Minecraft-, Forge- oder Bibliotheksabhängigkeiten: Zustandsautomat, Ereignisse, Messwerte, Statistik, HMAC-Kennung und CSV-Exporter |
 | `forge/` | Eigenständige Client-Mod, optionaler Lumen-Mixin, Vanilla-Positionsbeobachter, Sampling, Konfiguration, F8-Dashboard und asynchroner Export |
 | `examples/` | Acht **synthetische** Versuche mit allen fünf Status, einschließlich Dimensionswechsel |
-| `tools/` | Java-Simulationen ohne Gradle, Pandas-Validierung, optionaler Windows-Build und GitHub-Veröffentlichung |
+| `tools/` | Java-Simulationen ohne Gradle, Pandas-Validierung und optionaler Windows-Build |
 | `docs/` | Quellcodeanalyse, Integrationsvertrag, CSV-Schema, Messgrenzen und Prüfbericht |
 
 Der Analyzer benötigt **keine Änderungen am Lumen-Quellcode**. Der optionale `@Pseudo`-Mixin beobachtet den Eintritt und die erfolgreiche Rückkehr von `TeleportService.teleportTo`. Er liest den privaten Zielrecord über dessen Accessoren. Abgewiesene Aufrufe erzeugen keinen Versuch. Der Vanilla-Mixin liest die bereits angewendete Serverposition nach `handleMovePlayer`; relative Koordinaten werden von Vanilla aufgelöst. Alle Bestätigungen bleiben bei Vanilla. Details: [Integration](docs/INTEGRATION.md), [Quellcodeanalyse](docs/LUMEN_ANALYSIS.md).
@@ -93,4 +95,3 @@ python tools/validate_csv.py
 Simulationen prüfen stabile Ankunft, fehlende Serverbelege, späte Rollbacks, verzögerte Korrekturen, Teilbewegung, Timeout, Disconnect, Sitzungs-/Dimensionswechsel, Messlücken, aufeinanderfolgende Versuche, Uhrzeitsprünge, Speicherlimit, Pseudonymisierung und CSV-Escaping. Pandas prüft zusätzlich Schema, Typen, IDs, Zeitreihenfolge und alle Status. [Prüfbericht und offene Laufzeitprüfungen](docs/VERIFICATION.md).
 
 Das Repository enthält keine kopierten Lumen-Quellen. Untersucht wurde [ILinIky/Minecraft-Lumen-Client](https://github.com/ILinIky/Minecraft-Lumen-Client), Commit `4e6442fbc3cb126534491d42eb28eda86a850060`. Der Hook ist versionsgebunden; nach Änderungen an Lumen bitte die Integrationsprüfung wiederholen. Für neu erzeugten Code werden hier keine weitergehenden Lizenzrechte eingeräumt; Gradle-Wrapper-Lizenzhinweise sind unter `gradle/` enthalten.
-

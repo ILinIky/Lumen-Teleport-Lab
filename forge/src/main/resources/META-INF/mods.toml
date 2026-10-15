@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[57,)"
+license="All Rights Reserved"
+clientSideOnly=true
+[[mods]]
+modId="teleportlab"
+version="1.0.0"
+displayName="Lumen Teleport Lab"
+authors="Lumen Teleport Lab contributors"
+description='''Optional, passive teleport diagnostics for Lumen Client. Local CSV export; no packet manipulation.'''
+[[dependencies.teleportlab]]
+modId="forge"
+mandatory=true
+versionRange="[57.0.3,58)"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.teleportlab]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.21.7]"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.teleportlab]]
+modId="examplemod"
+mandatory=false
+versionRange="[0,)"
+ordering="AFTER"
+side="CLIENT"

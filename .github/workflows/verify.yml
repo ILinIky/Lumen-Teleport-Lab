@@ -1,0 +1,25 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r tools/requirements.txt
+      - run: chmod +x gradlew
+      - run: ./gradlew build
+      - run: python tools/validate_csv.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Lumen-Teleport-Lab-1.21.7
+          path: forge/build/libs/*.jar

@@ -1,0 +1,12 @@
+.gradle/
+**/build/
+forge/run/
+.idea/
+*.iml
+exports/
+dist/
+*.log
+tools/__pycache__/
+# Lokale Kopien der Hauptprojekt-Werkzeuge sind keine Lab-Bestandteile.
+/tools/lumen-build.ps1
+/tools/new-mc-version.ps1
