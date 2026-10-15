@@ -15,7 +15,7 @@ Eigenständiges, ausschließlich beobachtendes Diagnosewerkzeug für **Lumen Cli
 
 Das Dashboard zeigt Versuche, stabile Erfolge, Korrekturen, Quote, unklare Ergebnisse und mittleren Ping. Die Tabelle ist seitenweise durchsuchbar; **Details** zeigt Koordinaten, Abweichung, Zeitmessungen, Gründe und relevante Ereignisse. Zurücksetzen fragt vor dem Verwerfen der Messdaten nach.
 
-Unter Windows kann auch `teleport_analyser_bauen.bat` gestartet werden. Der Starter baut und testet; nur das ausdrücklich angegebene Argument `-Install` kopiert die Lab-JAR nach `%APPDATA%/.minecraft/mods`. Die Zielplattform steht in `versions/1.21.7.properties`; eine andere Minecraft-Version erfordert zusätzlich eine Anpassung und Prüfung der Mixins.
+Unter Windows genügt ein Doppelklick auf `teleport_analyser_bauen.bat`: Der Starter baut und testet den aktuellen Quellstand und installiert anschließend automatisch dessen Lab-JAR nach `%APPDATA%/.minecraft/mods`. Minecraft vor dem Aktualisieren schließen. Vorherige Lab-JARs werden nach `.minecraft/mod-backups/teleportlab` verschoben, damit keine doppelten Mod-Versionen geladen werden. Nur nach erfolgreichem Build wird installiert; die aktuelle JAR wird direkt aus Gradles Build-Ergebnis ermittelt, ohne fest eingetragenen Versionsnamen. `-NoInstall` baut nur; `-Offline` nutzt bereits heruntergeladene Abhängigkeiten. Für andere Minecraft-Profile kann `-ModsDirectory "D:\Mein Profil\mods"` angegeben werden. Die Zielplattform steht in `versions/1.21.7.properties`; eine andere Minecraft-Version erfordert zusätzlich eine Anpassung und Prüfung der Mixins.
 
 ## Komponenten
 

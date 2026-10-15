@@ -42,6 +42,20 @@ tasks.named('jar', Jar) {
     exclude 'dev/lumen/teleportlab/smoke/**'
     manifest.attributes('MixinConfigs': 'teleportlab.mixins.json')
 }
+def installManifest = layout.buildDirectory.file('install-artifact.json')
+tasks.register('writeInstallManifest') {
+    dependsOn tasks.named('jar')
+    def artifact = tasks.named('jar', Jar).flatMap { it.archiveFile }
+    inputs.file(artifact)
+    inputs.property('archivePath', artifact.map { rootProject.relativePath(it.asFile) })
+    outputs.file(installManifest)
+    doLast {
+        installManifest.get().asFile.text = groovy.json.JsonOutput.toJson([
+                artifact: rootProject.relativePath(artifact.get().asFile)
+        ])
+    }
+}
+tasks.named('build') { dependsOn tasks.named('writeInstallManifest') }
 // Forge 57 discovers an exploded mod only when its classes and metadata share a root.
 sourceSets.each {
     def outputDirectory = layout.buildDirectory.dir("sourceSets/$it.name")
